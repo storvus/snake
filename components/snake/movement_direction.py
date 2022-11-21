@@ -21,6 +21,9 @@ class MovementDirection:
 
     def get_next_coordinates_for_point(self, point: GameCoordinate) -> GameCoordinate:
         if self.next_direction in self.forbidden_turns.get(self.current_direction, []):
+            print(f"Cannot change the direction to the opposite. Current direction: {self.current_direction}. "
+                  f"Requested direction: {self.next_direction}")
+            self.next_direction = self.current_direction
             return self._get_next_coordinates_for_point(point)
         self.current_direction = self.next_direction
         return self._get_next_coordinates_for_point(point)
